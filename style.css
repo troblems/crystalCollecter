@@ -1,0 +1,48 @@
+body {
+  background-image: url("doozers.jpg");
+}
+.container1 {
+   display: inline-flex;
+
+  flex-direction:row;
+ text-align: center;
+ border-width: 2px;
+ border-style: solid;
+ border-color: black;
+ background-color:#09e1ed;
+
+}
+box1 {
+
+    text-align: center;
+}
+
+.container2 {
+  display: flex;
+   flex-wrap: wrap;
+   align-content: stretch;
+   height: 30%;
+}
+box2 {
+width: 30%;
+
+}
+box3{
+  width: 30%;
+}
+box4 {
+  width: 30%;
+}
+box5{
+  width: 30%;
+}
+.score {
+  background-color: #e508ed;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  display: inline-flex;
+
+ flex-direction:row;
+text-align: center;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href=style.css>
+  <title>Crystal Collector</title>
+  <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container1">
+      <div class="box1">
+        <h1>Crystal collector</h1>
+        <p>To start the game, choose a crystal.
+          <br> Each crystal has a random number assigned to it.
+          <br> Match the values of the crystals to the random number shown above the crystals.
+          <br> Try not to go over!
+        </p>
+      </div>
+    </div>
+  </header>
+  <div class="container2">
+    <img id="press1" src="crystal.jpg" alt="crystal">
+    <img id="press2" src="crystal.jpg" alt="crystal">
+    <img id="press3" src="crystal.jpg" alt="crystal">
+    <img id="press4" src="crystal.jpg" alt="crystal">
+  </div>
+
+  <div class="score">
+    <h2>
+    Goal:<div id="goal"></div>
+    Current number:<div id="currentTotal"></div>
+    Wins:<div id="wins"></div>
+    Losses:<div id="losses"></div>
+</h2>
+  </div>
+
+<script>
+    /*
+    Game gives visible number between 19 and 120.
+    Game shows four crystals, with hidden random values between 1 and 12 each.
+    The player clicks the crystals to figure out how much each crystal is worth
+    In doing so their score is totaled up
+    The player is trying to match their score exactly with the visible number without going over.
+    Whether or not the player wins, the game is started over with new values for all five numbers.
+    */
+    $(document).ready(function() {
+     //the visible target number
+      var visibleNum = 0;
+      //the hidden value of the first gem
+      var ran1 = 0;
+      //the hidden value of the second gem
+      var ran2 = 0;
+      //the hidden value of the third gem
+      var ran3 = 0;
+      //the hidden value of the fourth gem
+      var ran4 = 0;
+      //tracks the number of wins
+      var wins = 0;
+      //tracks the number of losses
+      var losses = 0;
+      //tracks the running total of the gem interations for this round
+      var total = 0;
+      //allows incrementation of total wihout error
+      var newTotal = 0;
+
+
+      //sets all values initially
+      function firstRound(){
+        wins = 0;
+        total = 0;
+        losses = 0;
+        visibleNum = Math.floor(Math.random() * 102) + 19;
+        ran1 = Math.floor(Math.random() * 12) + 1;
+        ran2 = Math.floor(Math.random() * 12) + 1;
+        ran3 = Math.floor(Math.random() * 12) + 1;
+        ran4 = Math.floor(Math.random() * 12) + 1;
+        $("#wins").text(wins);
+        $("#losses").text(losses);
+        $("#goal").text(visibleNum);
+        $("#currentTotal").text(total);
+      }
+      function newRound(){
+        visibleNum = Math.floor(Math.random() * 102) + 19;
+        total = 0;
+        ran1 = Math.floor(Math.random() * 12) + 1;
+        ran2 = Math.floor(Math.random() * 12) + 1;
+        ran3 = Math.floor(Math.random() * 12) + 1;
+        ran4 = Math.floor(Math.random() * 12) + 1;
+        $("#currentTotal").text(total);
+        $("#goal").text(visibleNum);
+        $("#wins").text(wins);
+        $("#losses").text(losses);
+      }
+      function checkAgain() {
+      $("#press1").click(function(event) {
+        total = total + ran1;
+        $("#currentTotal").text(total);
+        checkScore();
+      });
+      $("#press2").click(function(event) {
+        total += ran2;
+        $("#currentTotal").text(total);
+        checkScore();
+      });
+      $("#press3").click(function(event) {
+        total += ran3;
+        $("#currentTotal").text(total);
+        checkScore();
+      });
+      $("#press4").click(function(event) {
+        total += ran4;
+        $("#currentTotal").text(total);
+        checkScore();
+      });
+    }
+
+        function checkScore() {
+          if (visibleNum === total) {
+            wins++;
+            total = 0;
+            alert("You win!");
+            newRound();
+          } else if (visibleNum < total) {
+            losses++;
+            total = 0;
+            alert("You lose, womp womp.");
+            newRound();
+          } /*else {
+            checkAgain();
+          }*/
+        }
+    if (visibleNum === 0 && wins === 0 && losses === 0 && total === 0){
+      firstRound();
+    }
+    checkAgain();
+  });
+
+</script>
+</body>
+
+</html>
